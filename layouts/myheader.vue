@@ -111,6 +111,7 @@ import cookie from 'js-cookie'
 import Vue from 'vue'
 import userInfoApi from '@/api/userInfo'
 import smsApi from '@/api/msm'
+import wexinApi from "../api/userInfo/wexinApi";
 
 const defaultDialogAtrr = {
   showLoginType: 'phone', // 控制手机登录与微信登录切换
@@ -156,9 +157,49 @@ export default {
       document.getElementById("loginDialog").click();
     })
     // 触发事件，显示登录层：loginEvent.$emit('loginDialogEvent')
+
+    //初始化微信js
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = 'https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js'
+    document.body.appendChild(script)
+
+    // 微信登录回调处理
+    let self = this;
+    window["loginCallback"] = (name,token, openid) => {
+      self.loginCallback(name, token, openid);
+    }
+
   },
 
   methods: {
+    loginCallback(name, token, openid) {
+      // 打开手机登录层，绑定手机号，改逻辑与手机登录一致
+      if(openid != '') {
+        this.userInfo.openid = openid
+        this.showLogin()
+      } else {
+        this.setCookies(name, token)
+      }
+    },
+
+    weixinLogin() {
+      this.dialogAtrr.showLoginType = 'weixin'
+
+      wexinApi.getLoginParam().then(response => {
+        console.log(response)
+        var obj = new WxLogin({
+          self_redirect:true,
+          id: 'weixinLogin', // 需要显示的容器id
+          appid: response.data.appid, // 公众号appid wx*******
+          scope: response.data.scope, // 网页默认即可
+          redirect_uri: response.data.redirectUri, // 授权成功后回调的url
+          state: response.data.state, // 可设置为简单的随机数加session用来校验
+          style: 'black', // 提供"black"、"white"可选。二维码的样式
+          href: '' // 外部css文件url，需要https
+        })
+      })
+    },
     // 绑定登录或获取验证码按钮
     btnClick() {
       // 判断是获取验证码还是登录
@@ -288,10 +329,6 @@ export default {
 
     handleSelect(item) {
       window.location.href = '/hospital/' + item.hoscode
-    },
-
-    weixinLogin() {
-      this.dialogAtrr.showLoginType = 'weixin'
     },
 
     phoneLogin() {
