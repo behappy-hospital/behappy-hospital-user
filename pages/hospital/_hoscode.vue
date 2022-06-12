@@ -4,8 +4,7 @@
     <!--左侧导航 #start -->
     <div class="nav left-nav">
       <div class="nav-item selected">
-<span class="v-link selected dark"
-      :onclick="'javascript:window.location=\'/hospital/'+hospital.hoscode+'\''">预约挂号 </span>
+        <span class="v-link selected dark" :onclick="'javascript:window.location=\'/hospital/'+hospital.hoscode+'\''">预约挂号 </span>
       </div>
       <div class="nav-item ">
         <span class="v-link clickable dark"
@@ -103,7 +102,7 @@ import '~/assets/css/hospital_personal.css'
 import '~/assets/css/hospital.css'
 import hospApi from "~/api/hosp/hospApi";
 import cookie from "js-cookie";
-
+import userInfoApi from '~/api/userInfo'
 
 export default {
   data() {
@@ -147,6 +146,15 @@ export default {
         loginEvent.$emit('loginDialogEvent')
         return
       }
+      // 判断认证状态
+      userInfoApi.getUserInfo().then(response => {
+        let authStatus = response.data.authStatus
+        // 状态为2认证通过
+        if (!authStatus || authStatus !== 2) {
+          window.location.href = '/user'
+          return
+        }
+      })
       window.location.href = '/hospital/schedule?hoscode=' + this.hoscode + "&depcode=" + depcode
     }
   }
