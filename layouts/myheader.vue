@@ -12,7 +12,7 @@
         <span class="text">尚医通 预约挂号统一平台</span>
       </div>
       <!-- 搜索框 -->
-      <div class="search-wrapper">
+<!--      <div class="search-wrapper">
         <div class="hospital-search animation-show">
           <el-autocomplete
             class="search-input small"
@@ -29,7 +29,7 @@
             </span>
           </el-autocomplete>
         </div>
-      </div>
+      </div>-->
       <!-- 右侧 -->
       <div class="right-wrapper">
         <span class="v-link clickable">帮助中心</span>
@@ -155,6 +155,7 @@
         </div>
       </div>
     </el-dialog>
+    <div></div>
   </div>
 </template>
 <script>
@@ -229,7 +230,7 @@ export default {
     //微信回调方法
     loginCallback(name, token, openid) {
       // 打开手机登录层，绑定手机号，改逻辑与手机登录一致
-      if(openid != '') {
+      if(openid != '' && openid != null) {
         this.userInfo.openid = openid
         this.showLogin()
       } else {
