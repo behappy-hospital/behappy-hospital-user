@@ -126,7 +126,6 @@
         <div class="context-container" v-if="userInfo.authStatus != 0">
           <div>
             <el-form
-              :model="formData"
               label-width="110px"
               label-position="right"
             >

@@ -199,7 +199,7 @@
                 用户信息
               </div>
               <div class="content-wrapper">
-                <el-form ref="form" :model="form">
+                <el-form ref="form">
                   <el-form-item class="form-item" label="就诊人手机号：">
                     {{ patient.phone }}
                   </el-form-item>
@@ -228,8 +228,8 @@ import "~/assets/css/hospital_personal.css";
 import "~/assets/css/hospital.css";
 
 import hospitalApi from "@/api/hosp";
-import patientApi from "@/api/patient"; 
-import orderApi from "@/api/orderInfo"; 
+import patientApi from "@/api/patient";
+import orderApi from "@/api/orderInfo";
 
 export default {
   data() {
