@@ -17,4 +17,4 @@ $ npm run generate
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
 
-## 使用localhost访问,不用用ipv4
+## 使用localhost访问,不要用ipv4
