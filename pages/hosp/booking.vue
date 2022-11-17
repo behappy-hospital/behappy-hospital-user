@@ -9,7 +9,7 @@
           :onclick="
             'javascript:window.location=\'/hospital/' + schedule.hoscode + '\''
           "
-          >预约挂号
+        >预约挂号
         </span>
       </div>
       <div class="nav-item">
@@ -112,7 +112,7 @@
               <div class="block"></div>
               选择就诊卡：
               <span class="card-tips"
-                ><span class="iconfont"></span>
+              ><span class="iconfont"></span>
                 如您持社保卡就诊，请务必选择医保预约挂号，以保证正常医保报销</span
               >
             </div>
@@ -133,10 +133,10 @@
               <div class="card SELF_PAY_CARD">
                 <div class="info">
                   <span class="type">{{
-                    patient.isInsure == 0 ? "自费" : "医保"
-                  }}</span
+                      patient.isInsure == 0 ? "自费" : "医保"
+                    }}</span
                   ><span class="card-no">{{ patient.certificatesNo }}</span
-                  ><span class="card-view">居民身份证</span>
+                ><span class="card-view">居民身份证</span>
                 </div>
                 <span class="operate"></span>
               </div>
@@ -154,7 +154,7 @@
                 <el-form-item label="就诊日期：">
                   <div class="content">
                     <span
-                      >{{ schedule.workDate }} {{ schedule.param.dayOfWeek }}
+                    >{{ schedule.workDate }} {{ schedule.param.dayOfWeek }}
                       {{ schedule.workTime == 0 ? "上午" : "下午" }}</span
                     >
                   </div>
@@ -279,29 +279,29 @@ export default {
       this.patient = this.patientList[index];
     },
 
-    //生成订单
-    submitOrder() {
-    // 防止重复提交
-    if(this.submitBnt == '正在提交...') {
-    this.$message.error('不能重复提交')
-    return
-    }
-
-    this.submitBnt = '正在提交...'
-    orderApi.saveOrders(this.scheduleId, this.patient.id).then(response => {
-    let orderId = response.data
-    window.location.href = '/order/show?orderId=' + orderId
-    }).catch(e => {
-    this.submitBnt = '确认挂号'
-    })
-},
-
-    },
-
     addPatient() {
       window.location.href = "/patient/add";
     },
-  }
+    //生成订单
+    submitOrder() {
+      // 防止重复提交
+      if (this.submitBnt == '正在提交...') {
+        this.$message.error('不能重复提交')
+        return
+      }
+
+      this.submitBnt = '正在提交...'
+      orderApi.saveOrders(this.scheduleId, this.patient.id).then(response => {
+        let orderId = response.data
+        window.location.href = '/order/show?orderId=' + orderId
+      }).catch(e => {
+        this.submitBnt = '确认挂号'
+      })
+    },
+
+  },
+
+}
 
 </script>
 <style>
@@ -313,6 +313,7 @@ export default {
   -ms-flex-align: center;
   align-items: center;
 }
+
 .hospital-order .sub-title {
   letter-spacing: 1px;
   color: #999;
@@ -324,12 +325,15 @@ export default {
   -ms-flex-align: center;
   align-items: center;
 }
+
 .hospital-order .content-wrapper .content {
   color: #333;
 }
+
 .el-form-item {
   margin-bottom: 5px;
 }
+
 .hospital-order .content-wrapper {
   margin-left: 140px;
   margin-top: 20px;

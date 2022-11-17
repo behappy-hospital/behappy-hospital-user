@@ -230,8 +230,9 @@ export default {
     //微信回调方法
     loginCallback(name, token, openid) {
       // 打开手机登录层，绑定手机号，改逻辑与手机登录一致
-      if(openid != '' && openid != null) {
+      if(openid !== '' && openid != null) {
         this.userInfo.openid = openid
+        this.$message.info("请绑定手机号");
         this.showLogin()
       } else {
         this.setCookies(name, token)

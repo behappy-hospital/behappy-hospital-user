@@ -170,7 +170,7 @@ export default {
     return {
       userAuah: defaultForm,
       certificatesTypeList: [],
-      fileUrl: "http://localhost/api/oss/file/fileUpload",
+      fileUrl: "http://localhost:8088/api/oss/file/fileUpload",
       userInfo: {
         param: {},
       },
