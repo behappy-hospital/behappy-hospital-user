@@ -13,7 +13,7 @@ service.interceptors.request.use(
         //判断cookie是否有token值
         if (cookie.get('token')) {
             //token值放到cookie里面
-            config.headers['token'] = cookie.get('token')
+            config.headers['Authorization'] = cookie.get('token')
         }
         return config
     },
