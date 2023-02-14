@@ -159,7 +159,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.list = response.data.records;
-          this.total = response.data.total;
+          this.total = parseInt(response.data.total);
         });
     },
     findPatientList() {
@@ -173,7 +173,6 @@ export default {
       });
     },
     changeSize(size) {
-      console.log(size);
       this.limit = size;
       this.fetchData(1);
     },

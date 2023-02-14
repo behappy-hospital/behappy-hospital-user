@@ -263,7 +263,7 @@ export default {
         )
         .then((response) => {
           this.bookingScheduleList = response.data.bookingScheduleList;
-          this.total = response.data.total;
+          this.total = parseInt(response.data.total);
           this.baseMap = response.data.baseMap;
 
           this.dealClass();

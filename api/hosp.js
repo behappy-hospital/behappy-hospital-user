@@ -10,7 +10,6 @@ export default {
     })
   },
   getByHosname(hosname) {
-    console.log('测试:',hosname)
     return request({
       url: `${api_name}/findByHosname/${hosname}`,
       method: 'get'
